@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dataanalysis.mapper.DeviceDao">
+  <resultMap id="BaseResultMap" type="com.example.dataanalysis.basic.Device">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="org_name" jdbcType="VARCHAR" property="orgName" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="depart_name" jdbcType="VARCHAR" property="departName" />
+    <result column="cellphone" jdbcType="VARCHAR" property="cellphone" />
+    <result column="landline_phone" jdbcType="VARCHAR" property="landlinePhone" />
+    <result column="computer_name" jdbcType="VARCHAR" property="computerName" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="group" jdbcType="VARCHAR" property="group" />
+    <result column="ip_address" jdbcType="VARCHAR" property="ipAddress" />
+    <result column="index" jdbcType="INTEGER" property="index" />
+    <result column="device_type" jdbcType="VARCHAR" property="deviceType" />
+    <result column="browser_version" jdbcType="VARCHAR" property="browserVersion" />
+    <result column="client_version" jdbcType="VARCHAR" property="clientVersion" />
+    <result column="platform" jdbcType="VARCHAR" property="platform" />
+    <result column="system_type" jdbcType="VARCHAR" property="systemType" />
+    <result column="system_version" jdbcType="VARCHAR" property="systemVersion" />
+    <result column="last_conn_time" jdbcType="TIMESTAMP" property="lastConnTime" />
+    <result column="last_broken_time" jdbcType="TIMESTAMP" property="lastBrokenTime" />
+    <result column="login_account" jdbcType="VARCHAR" property="loginAccount" />
+    <result column="comm_ip_address" jdbcType="VARCHAR" property="commIpAddress" />
+    <result column="mac_address" jdbcType="VARCHAR" property="macAddress" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+    <result column="use_name" jdbcType="VARCHAR" property="useName" />
+    <result column="use_department" jdbcType="VARCHAR" property="useDepartment" />
+    <result column="register_time" jdbcType="TIMESTAMP" property="registerTime" />
+    <result column="use_phone" jdbcType="VARCHAR" property="usePhone" />
+    <result column="use_status" jdbcType="VARCHAR" property="useStatus" />
+    <result column="register_status" jdbcType="VARCHAR" property="registerStatus" />
+    <result column="computer_source" jdbcType="VARCHAR" property="computerSource" />
+    <result column="balance_no" jdbcType="VARCHAR" property="balanceNo" />
+    <result column="netin_start_time" jdbcType="TIMESTAMP" property="netinStartTime" />
+    <result column="netin_end_time" jdbcType="TIMESTAMP" property="netinEndTime" />
+    <result column="register_type" jdbcType="VARCHAR" property="registerType" />
+    <result column="approve_status" jdbcType="VARCHAR" property="approveStatus" />
+    <result column="antivirus_name" jdbcType="VARCHAR" property="antivirusName" />
+    <result column="antivirus_version" jdbcType="VARCHAR" property="antivirusVersion" />
+    <result column="antivirus_newest" jdbcType="VARCHAR" property="antivirusNewest" />
+    <result column="virus_database_version" jdbcType="VARCHAR" property="virusDatabaseVersion" />
+    <result column="default_browser" jdbcType="VARCHAR" property="defaultBrowser" />
+    <result column="active_status" jdbcType="VARCHAR" property="activeStatus" />
+    <result column="authorize_status" jdbcType="VARCHAR" property="authorizeStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, org_name, remark, depart_name, cellphone, landline_phone, computer_name, `status`, 
+    `group`, ip_address, `index`, device_type, browser_version, client_version, platform, 
+    system_type, system_version, last_conn_time, last_broken_time, login_account, comm_ip_address, 
+    mac_address, email, `location`, `position`, use_name, use_department, register_time, 
+    use_phone, use_status, register_status, computer_source, balance_no, netin_start_time, 
+    netin_end_time, register_type, approve_status, antivirus_name, antivirus_version, 
+    antivirus_newest, virus_database_version, default_browser, active_status, authorize_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from device
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="listPage" resultMap="BaseResultMap">
+    select id,
+           org_name,
+           remark,
+           depart_name,
+           cellphone,
+           landline_phone,
+           computer_name,
+           status,
+           `group`,
+           ip_address,
+           `index`,
+           device_type,
+           browser_version,
+           client_version,
+           platform,
+           system_type,
+           system_version,
+           last_conn_time,
+           last_broken_time,
+           login_account,
+           comm_ip_address,
+           mac_address,
+           email,
+           location,
+           position,
+           use_name,
+           use_department,
+           register_time,
+           use_phone,
+           use_status,
+           register_status,
+           computer_source,
+           balance_no,
+           netin_start_time,
+           netin_end_time,
+           register_type,
+           approve_status,
+           antivirus_name,
+           antivirus_version,
+           antivirus_newest,
+           virus_database_version,
+           default_browser,
+           active_status,
+           authorize_status
+    from device
+    <where>
+      <if test="departName != null">
+        depart_name = #{departName}
+      </if>
+    </where>
+  </select>
+  <select id="listPageCount" resultType="java.lang.Integer">
+    select count(0)
+    from device
+    <where>
+      <if test="departName != null">
+        depart_name = #{departName}
+      </if>
+    </where>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from device
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.dataanalysis.basic.Device" useGeneratedKeys="true">
+    insert into device (id, org_name, remark, depart_name,
+      cellphone, landline_phone, computer_name, 
+      `status`, `group`, ip_address, 
+      `index`, device_type, browser_version, 
+      client_version, platform, system_type, 
+      system_version, last_conn_time, last_broken_time, 
+      login_account, comm_ip_address, mac_address, 
+      email, `location`, `position`, 
+      use_name, use_department, register_time, 
+      use_phone, use_status, register_status, 
+      computer_source, balance_no, netin_start_time, 
+      netin_end_time, register_type, approve_status, 
+      antivirus_name, antivirus_version, antivirus_newest, 
+      virus_database_version, default_browser, active_status, 
+      authorize_status)
+    values (#{id,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{departName,jdbcType=VARCHAR},
+      #{cellphone,jdbcType=VARCHAR}, #{landlinePhone,jdbcType=VARCHAR}, #{computerName,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{group,jdbcType=VARCHAR}, #{ipAddress,jdbcType=VARCHAR}, 
+      #{index,jdbcType=INTEGER}, #{deviceType,jdbcType=VARCHAR}, #{browserVersion,jdbcType=VARCHAR}, 
+      #{clientVersion,jdbcType=VARCHAR}, #{platform,jdbcType=VARCHAR}, #{systemType,jdbcType=VARCHAR}, 
+      #{systemVersion,jdbcType=VARCHAR}, #{lastConnTime,jdbcType=TIMESTAMP}, #{lastBrokenTime,jdbcType=TIMESTAMP}, 
+      #{loginAccount,jdbcType=VARCHAR}, #{commIpAddress,jdbcType=VARCHAR}, #{macAddress,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, 
+      #{useName,jdbcType=VARCHAR}, #{useDepartment,jdbcType=VARCHAR}, #{registerTime,jdbcType=TIMESTAMP}, 
+      #{usePhone,jdbcType=VARCHAR}, #{useStatus,jdbcType=VARCHAR}, #{registerStatus,jdbcType=VARCHAR}, 
+      #{computerSource,jdbcType=VARCHAR}, #{balanceNo,jdbcType=VARCHAR}, #{netinStartTime,jdbcType=TIMESTAMP}, 
+      #{netinEndTime,jdbcType=TIMESTAMP}, #{registerType,jdbcType=VARCHAR}, #{approveStatus,jdbcType=VARCHAR}, 
+      #{antivirusName,jdbcType=VARCHAR}, #{antivirusVersion,jdbcType=VARCHAR}, #{antivirusNewest,jdbcType=VARCHAR}, 
+      #{virusDatabaseVersion,jdbcType=VARCHAR}, #{defaultBrowser,jdbcType=VARCHAR}, #{activeStatus,jdbcType=VARCHAR}, 
+      #{authorizeStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.dataanalysis.basic.Device" useGeneratedKeys="true">
+    insert into device
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        id,
+      <if test="orgName != null">
+        org_name,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="departName != null">
+        depart_name,
+      </if>
+      <if test="cellphone != null">
+        cellphone,
+      </if>
+      <if test="landlinePhone != null">
+        landline_phone,
+      </if>
+      <if test="computerName != null">
+        computer_name,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="group != null">
+        `group`,
+      </if>
+      <if test="ipAddress != null">
+        ip_address,
+      </if>
+      <if test="index != null">
+        `index`,
+      </if>
+      <if test="deviceType != null">
+        device_type,
+      </if>
+      <if test="browserVersion != null">
+        browser_version,
+      </if>
+      <if test="clientVersion != null">
+        client_version,
+      </if>
+      <if test="platform != null">
+        platform,
+      </if>
+      <if test="systemType != null">
+        system_type,
+      </if>
+      <if test="systemVersion != null">
+        system_version,
+      </if>
+      <if test="lastConnTime != null">
+        last_conn_time,
+      </if>
+      <if test="lastBrokenTime != null">
+        last_broken_time,
+      </if>
+      <if test="loginAccount != null">
+        login_account,
+      </if>
+      <if test="commIpAddress != null">
+        comm_ip_address,
+      </if>
+      <if test="macAddress != null">
+        mac_address,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="location != null">
+        `location`,
+      </if>
+      <if test="position != null">
+        `position`,
+      </if>
+      <if test="useName != null">
+        use_name,
+      </if>
+      <if test="useDepartment != null">
+        use_department,
+      </if>
+      <if test="registerTime != null">
+        register_time,
+      </if>
+      <if test="usePhone != null">
+        use_phone,
+      </if>
+      <if test="useStatus != null">
+        use_status,
+      </if>
+      <if test="registerStatus != null">
+        register_status,
+      </if>
+      <if test="computerSource != null">
+        computer_source,
+      </if>
+      <if test="balanceNo != null">
+        balance_no,
+      </if>
+      <if test="netinStartTime != null">
+        netin_start_time,
+      </if>
+      <if test="netinEndTime != null">
+        netin_end_time,
+      </if>
+      <if test="registerType != null">
+        register_type,
+      </if>
+      <if test="approveStatus != null">
+        approve_status,
+      </if>
+      <if test="antivirusName != null">
+        antivirus_name,
+      </if>
+      <if test="antivirusVersion != null">
+        antivirus_version,
+      </if>
+      <if test="antivirusNewest != null">
+        antivirus_newest,
+      </if>
+      <if test="virusDatabaseVersion != null">
+        virus_database_version,
+      </if>
+      <if test="defaultBrowser != null">
+        default_browser,
+      </if>
+      <if test="activeStatus != null">
+        active_status,
+      </if>
+      <if test="authorizeStatus != null">
+        authorize_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+        #{id,jdbcType=VARCHAR},
+      <if test="orgName != null">
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="departName != null">
+        #{departName,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphone != null">
+        #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="landlinePhone != null">
+        #{landlinePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="computerName != null">
+        #{computerName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="group != null">
+        #{group,jdbcType=VARCHAR},
+      </if>
+      <if test="ipAddress != null">
+        #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="index != null">
+        #{index,jdbcType=INTEGER},
+      </if>
+      <if test="deviceType != null">
+        #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="browserVersion != null">
+        #{browserVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="clientVersion != null">
+        #{clientVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null">
+        #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="systemType != null">
+        #{systemType,jdbcType=VARCHAR},
+      </if>
+      <if test="systemVersion != null">
+        #{systemVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="lastConnTime != null">
+        #{lastConnTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastBrokenTime != null">
+        #{lastBrokenTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginAccount != null">
+        #{loginAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="commIpAddress != null">
+        #{commIpAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="macAddress != null">
+        #{macAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="useName != null">
+        #{useName,jdbcType=VARCHAR},
+      </if>
+      <if test="useDepartment != null">
+        #{useDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null">
+        #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="usePhone != null">
+        #{usePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="useStatus != null">
+        #{useStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="registerStatus != null">
+        #{registerStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="computerSource != null">
+        #{computerSource,jdbcType=VARCHAR},
+      </if>
+      <if test="balanceNo != null">
+        #{balanceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="netinStartTime != null">
+        #{netinStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="netinEndTime != null">
+        #{netinEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="registerType != null">
+        #{registerType,jdbcType=VARCHAR},
+      </if>
+      <if test="approveStatus != null">
+        #{approveStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="antivirusName != null">
+        #{antivirusName,jdbcType=VARCHAR},
+      </if>
+      <if test="antivirusVersion != null">
+        #{antivirusVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="antivirusNewest != null">
+        #{antivirusNewest,jdbcType=VARCHAR},
+      </if>
+      <if test="virusDatabaseVersion != null">
+        #{virusDatabaseVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultBrowser != null">
+        #{defaultBrowser,jdbcType=VARCHAR},
+      </if>
+      <if test="activeStatus != null">
+        #{activeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="authorizeStatus != null">
+        #{authorizeStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.dataanalysis.basic.Device">
+    update device
+    <set>
+      <if test="orgName != null">
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="departName != null">
+        depart_name = #{departName,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphone != null">
+        cellphone = #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="landlinePhone != null">
+        landline_phone = #{landlinePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="computerName != null">
+        computer_name = #{computerName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="group != null">
+        `group` = #{group,jdbcType=VARCHAR},
+      </if>
+      <if test="ipAddress != null">
+        ip_address = #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="index != null">
+        `index` = #{index,jdbcType=INTEGER},
+      </if>
+      <if test="deviceType != null">
+        device_type = #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="browserVersion != null">
+        browser_version = #{browserVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="clientVersion != null">
+        client_version = #{clientVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null">
+        platform = #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="systemType != null">
+        system_type = #{systemType,jdbcType=VARCHAR},
+      </if>
+      <if test="systemVersion != null">
+        system_version = #{systemVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="lastConnTime != null">
+        last_conn_time = #{lastConnTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastBrokenTime != null">
+        last_broken_time = #{lastBrokenTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginAccount != null">
+        login_account = #{loginAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="commIpAddress != null">
+        comm_ip_address = #{commIpAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="macAddress != null">
+        mac_address = #{macAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        `location` = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        `position` = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="useName != null">
+        use_name = #{useName,jdbcType=VARCHAR},
+      </if>
+      <if test="useDepartment != null">
+        use_department = #{useDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null">
+        register_time = #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="usePhone != null">
+        use_phone = #{usePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="useStatus != null">
+        use_status = #{useStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="registerStatus != null">
+        register_status = #{registerStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="computerSource != null">
+        computer_source = #{computerSource,jdbcType=VARCHAR},
+      </if>
+      <if test="balanceNo != null">
+        balance_no = #{balanceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="netinStartTime != null">
+        netin_start_time = #{netinStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="netinEndTime != null">
+        netin_end_time = #{netinEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="registerType != null">
+        register_type = #{registerType,jdbcType=VARCHAR},
+      </if>
+      <if test="approveStatus != null">
+        approve_status = #{approveStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="antivirusName != null">
+        antivirus_name = #{antivirusName,jdbcType=VARCHAR},
+      </if>
+      <if test="antivirusVersion != null">
+        antivirus_version = #{antivirusVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="antivirusNewest != null">
+        antivirus_newest = #{antivirusNewest,jdbcType=VARCHAR},
+      </if>
+      <if test="virusDatabaseVersion != null">
+        virus_database_version = #{virusDatabaseVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultBrowser != null">
+        default_browser = #{defaultBrowser,jdbcType=VARCHAR},
+      </if>
+      <if test="activeStatus != null">
+        active_status = #{activeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="authorizeStatus != null">
+        authorize_status = #{authorizeStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.dataanalysis.basic.Device">
+    update device
+    set org_name = #{orgName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      depart_name = #{departName,jdbcType=VARCHAR},
+      cellphone = #{cellphone,jdbcType=VARCHAR},
+      landline_phone = #{landlinePhone,jdbcType=VARCHAR},
+      computer_name = #{computerName,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=VARCHAR},
+      `group` = #{group,jdbcType=VARCHAR},
+      ip_address = #{ipAddress,jdbcType=VARCHAR},
+      `index` = #{index,jdbcType=INTEGER},
+      device_type = #{deviceType,jdbcType=VARCHAR},
+      browser_version = #{browserVersion,jdbcType=VARCHAR},
+      client_version = #{clientVersion,jdbcType=VARCHAR},
+      platform = #{platform,jdbcType=VARCHAR},
+      system_type = #{systemType,jdbcType=VARCHAR},
+      system_version = #{systemVersion,jdbcType=VARCHAR},
+      last_conn_time = #{lastConnTime,jdbcType=TIMESTAMP},
+      last_broken_time = #{lastBrokenTime,jdbcType=TIMESTAMP},
+      login_account = #{loginAccount,jdbcType=VARCHAR},
+      comm_ip_address = #{commIpAddress,jdbcType=VARCHAR},
+      mac_address = #{macAddress,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      `location` = #{location,jdbcType=VARCHAR},
+      `position` = #{position,jdbcType=VARCHAR},
+      use_name = #{useName,jdbcType=VARCHAR},
+      use_department = #{useDepartment,jdbcType=VARCHAR},
+      register_time = #{registerTime,jdbcType=TIMESTAMP},
+      use_phone = #{usePhone,jdbcType=VARCHAR},
+      use_status = #{useStatus,jdbcType=VARCHAR},
+      register_status = #{registerStatus,jdbcType=VARCHAR},
+      computer_source = #{computerSource,jdbcType=VARCHAR},
+      balance_no = #{balanceNo,jdbcType=VARCHAR},
+      netin_start_time = #{netinStartTime,jdbcType=TIMESTAMP},
+      netin_end_time = #{netinEndTime,jdbcType=TIMESTAMP},
+      register_type = #{registerType,jdbcType=VARCHAR},
+      approve_status = #{approveStatus,jdbcType=VARCHAR},
+      antivirus_name = #{antivirusName,jdbcType=VARCHAR},
+      antivirus_version = #{antivirusVersion,jdbcType=VARCHAR},
+      antivirus_newest = #{antivirusNewest,jdbcType=VARCHAR},
+      virus_database_version = #{virusDatabaseVersion,jdbcType=VARCHAR},
+      default_browser = #{defaultBrowser,jdbcType=VARCHAR},
+      active_status = #{activeStatus,jdbcType=VARCHAR},
+      authorize_status = #{authorizeStatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

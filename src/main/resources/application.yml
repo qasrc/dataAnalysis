@@ -1,0 +1,17 @@
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+  application:
+    name: dataAnalysis
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test
+    username: root
+    password: SCM@2020
+server:
+  port: 8080
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:generator/*.xml

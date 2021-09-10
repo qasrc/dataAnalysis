@@ -1,0 +1,86 @@
+create table device
+(
+    id                     varchar(50)   not null
+        primary key,
+    org_name               varchar(100)  null comment '分支机构',
+    remark                 varchar(1000) null comment '备注',
+    depart_name            varchar(100)  null comment '单位名称',
+    cellphone              varchar(11)   null comment '手机号码',
+    landline_phone         varchar(15)   null comment '座机号码',
+    computer_name          varchar(100)  null comment '计算机名',
+    status                 varchar(10)   null comment '状态',
+    `group`                varchar(50)   null comment '所属组',
+    ip_address             varchar(20)   null comment 'ip地址',
+    `index`                int           null comment '序号',
+    device_type            varchar(50)   null comment '设备类型',
+    browser_version        varchar(50)   null comment '浏览器版本',
+    client_version         varchar(50)   null comment '客户端版本',
+    platform               varchar(50)   null comment '平台',
+    system_type            varchar(50)   null comment '系统类型',
+    system_version         varchar(50)   null comment '系统版本',
+    last_conn_time         timestamp     null comment '最后连接时间',
+    last_broken_time       timestamp     null comment '最后断开时间',
+    login_account          varchar(50)   null comment '登录账号',
+    comm_ip_address        varchar(50)   null comment '通信IP地址',
+    mac_address            varchar(50)   null comment 'mac地址',
+    email                  varchar(50)   null,
+    location               varchar(300)  null comment '办公地点',
+    position               varchar(100)  null comment '职位',
+    use_name               varchar(50)   null comment '使用人姓名',
+    use_department         varchar(50)   null comment '所属部门',
+    register_time          timestamp     null comment '注册时间',
+    use_phone              varchar(20)   null comment '电话',
+    use_status             varchar(10)   null comment '人员状态',
+    register_status        varchar(10)   null comment '注册状态',
+    computer_source        varchar(50)   null comment '计算机来源',
+    balance_no             varchar(50)   null comment '资产编号',
+    netin_start_time       timestamp     null comment '入网申请开始时间',
+    netin_end_time         timestamp     null comment '入网申请结束时间',
+    register_type          varchar(20)   null comment '注册类型',
+    approve_status         varchar(20)   null comment '审批状态',
+    antivirus_name         varchar(50)   null comment '杀毒软件名称',
+    antivirus_version      varchar(50)   null comment '杀毒软件版本',
+    antivirus_newest       varchar(10)   null comment '杀毒软件是否最新',
+    virus_database_version varchar(50)   null comment '病毒库版本',
+    default_browser        varchar(50)   null comment '默认浏览器',
+    active_status          varchar(10)   null comment '激活状态',
+    authorize_status       varchar(10)   null comment '授权状态'
+)
+    comment '桌管设备列表';
+
+create table virus_log
+(
+    id              varchar(50)  not null
+        primary key,
+    date            timestamp    null,
+    terminal        varchar(50)  null comment '终端',
+    domain          varchar(50)  null comment '域',
+    login_name      varchar(50)  null comment '登录名',
+    platform        varchar(50)  null comment '平台',
+    security_threat varchar(100) null comment '安全威胁',
+    infect_source   varchar(100) null comment '感染源',
+    infect_file     varchar(200) null comment '受感染的文件',
+    file_path       varchar(200) null comment '文件路径',
+    type            varchar(50)  null comment '扫描类型',
+    result          varchar(200) null comment '结果',
+    ip_address      varchar(50)  null comment 'ip地址',
+    mac_address     varchar(50)  null comment 'mac地址'
+)
+    comment '病毒查杀日志';
+
+create table vpn_user
+(
+    id          varchar(50)  not null
+        primary key,
+    username    varchar(50)  null comment '用户名',
+    group_path  varchar(100) null comment '所属组路径',
+    password    varchar(50)  null comment '密码',
+    phone       varchar(20)  null comment '手机号码',
+    ip_address  varchar(50)  null comment '虚拟IP地址',
+    `desc`      varchar(500) null comment '描述',
+    ca          varchar(100) null comment '所属CA',
+    certificate varchar(100) null comment '证书绑定字段',
+    last_login  varchar(50)  null comment '最后一次登录'
+)
+    comment 'vpn用户';
+

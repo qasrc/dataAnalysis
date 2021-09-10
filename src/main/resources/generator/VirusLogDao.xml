@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dataanalysis.mapper.VirusLogDao">
+  <resultMap id="BaseResultMap" type="com.example.dataanalysis.basic.VirusLog">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <result column="terminal" jdbcType="VARCHAR" property="terminal" />
+    <result column="domain" jdbcType="VARCHAR" property="domain" />
+    <result column="login_name" jdbcType="VARCHAR" property="loginName" />
+    <result column="platform" jdbcType="VARCHAR" property="platform" />
+    <result column="security_threat" jdbcType="VARCHAR" property="securityThreat" />
+    <result column="infect_source" jdbcType="VARCHAR" property="infectSource" />
+    <result column="infect_file" jdbcType="VARCHAR" property="infectFile" />
+    <result column="file_path" jdbcType="VARCHAR" property="filePath" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="result" jdbcType="VARCHAR" property="result" />
+    <result column="ip_address" jdbcType="VARCHAR" property="ipAddress" />
+    <result column="mac_address" jdbcType="VARCHAR" property="macAddress" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, `date`, terminal, `domain`, login_name, platform, security_threat, infect_source, 
+    infect_file, file_path, `type`, `result`, ip_address, mac_address
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from virus_log
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from virus_log
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.dataanalysis.basic.VirusLog" useGeneratedKeys="true">
+    insert into virus_log (id, `date`, terminal, `domain`,
+      login_name, platform, security_threat, 
+      infect_source, infect_file, file_path, 
+      `type`, `result`, ip_address, 
+      mac_address)
+    values (#{id,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, #{terminal,jdbcType=VARCHAR}, #{domain,jdbcType=VARCHAR},
+      #{loginName,jdbcType=VARCHAR}, #{platform,jdbcType=VARCHAR}, #{securityThreat,jdbcType=VARCHAR}, 
+      #{infectSource,jdbcType=VARCHAR}, #{infectFile,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR}, #{ipAddress,jdbcType=VARCHAR}, 
+      #{macAddress,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.dataanalysis.basic.VirusLog" useGeneratedKeys="true">
+    insert into virus_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        id,
+      <if test="date != null">
+        `date`,
+      </if>
+      <if test="terminal != null">
+        terminal,
+      </if>
+      <if test="domain != null">
+        `domain`,
+      </if>
+      <if test="loginName != null">
+        login_name,
+      </if>
+      <if test="platform != null">
+        platform,
+      </if>
+      <if test="securityThreat != null">
+        security_threat,
+      </if>
+      <if test="infectSource != null">
+        infect_source,
+      </if>
+      <if test="infectFile != null">
+        infect_file,
+      </if>
+      <if test="filePath != null">
+        file_path,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="result != null">
+        `result`,
+      </if>
+      <if test="ipAddress != null">
+        ip_address,
+      </if>
+      <if test="macAddress != null">
+        mac_address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+        #{id,jdbcType=VARCHAR},
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="terminal != null">
+        #{terminal,jdbcType=VARCHAR},
+      </if>
+      <if test="domain != null">
+        #{domain,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null">
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null">
+        #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="securityThreat != null">
+        #{securityThreat,jdbcType=VARCHAR},
+      </if>
+      <if test="infectSource != null">
+        #{infectSource,jdbcType=VARCHAR},
+      </if>
+      <if test="infectFile != null">
+        #{infectFile,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null">
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="ipAddress != null">
+        #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="macAddress != null">
+        #{macAddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.dataanalysis.basic.VirusLog">
+    update virus_log
+    <set>
+      <if test="date != null">
+        `date` = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="terminal != null">
+        terminal = #{terminal,jdbcType=VARCHAR},
+      </if>
+      <if test="domain != null">
+        `domain` = #{domain,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null">
+        login_name = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null">
+        platform = #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="securityThreat != null">
+        security_threat = #{securityThreat,jdbcType=VARCHAR},
+      </if>
+      <if test="infectSource != null">
+        infect_source = #{infectSource,jdbcType=VARCHAR},
+      </if>
+      <if test="infectFile != null">
+        infect_file = #{infectFile,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null">
+        file_path = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null">
+        `result` = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="ipAddress != null">
+        ip_address = #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="macAddress != null">
+        mac_address = #{macAddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.dataanalysis.basic.VirusLog">
+    update virus_log
+    set `date` = #{date,jdbcType=TIMESTAMP},
+      terminal = #{terminal,jdbcType=VARCHAR},
+      `domain` = #{domain,jdbcType=VARCHAR},
+      login_name = #{loginName,jdbcType=VARCHAR},
+      platform = #{platform,jdbcType=VARCHAR},
+      security_threat = #{securityThreat,jdbcType=VARCHAR},
+      infect_source = #{infectSource,jdbcType=VARCHAR},
+      infect_file = #{infectFile,jdbcType=VARCHAR},
+      file_path = #{filePath,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=VARCHAR},
+      `result` = #{result,jdbcType=VARCHAR},
+      ip_address = #{ipAddress,jdbcType=VARCHAR},
+      mac_address = #{macAddress,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
