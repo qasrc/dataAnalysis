@@ -51,8 +51,8 @@
                     <a class="" href="javascript:void(0);">menu</a>
                     <dl class="layui-nav-child">
                         <dd><a href="<%=basePath%>views/deviceListPage" target="content">桌管设备</a></dd>
-                        <dd><a href="<%=basePath%>views/list" target="content">VPN用户</a></dd>
-                        <dd><a href="<%=basePath%>views/list" target="content">查杀日志</a></dd>
+                        <dd><a href="<%=basePath%>views/vpnUserPage" target="content">VPN用户</a></dd>
+                        <dd><a href="<%=basePath%>views/virusLogPage" target="content">查杀日志</a></dd>
                         <dd><a href="<%=basePath%>views/import" target="content">Excel导入</a></dd>
                         <dd><a href="<%=basePath%>views/import" target="content">统计分析</a></dd>
                     </dl>

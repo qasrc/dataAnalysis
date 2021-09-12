@@ -38,6 +38,16 @@ public class IndexController {
         return "deviceList";
     }
 
+    @RequestMapping("/vpnUserPage")
+    public String toVpnUserPage() {
+        return "vpnUserList";
+    }
+
+    @RequestMapping("/virusLogPage")
+    public String toVirusLogPage() {
+        return "virusLogList";
+    }
+
     @RequestMapping("/deviceList")
     @ResponseBody
     public ActionResult deviceList(int page, int limit) {
